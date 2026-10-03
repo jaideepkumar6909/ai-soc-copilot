@@ -1,0 +1,3 @@
+{"id": "benign_lookalike-000", "timestamp": "2026-10-02T13:00:00+00:00", "host": "ubuntu-lab", "user": "labuser", "src_ip": "192.0.2.44", "event_type": "ssh_failure"}
+{"id": "benign_lookalike-001", "timestamp": "2026-10-02T13:00:15+00:00", "host": "ubuntu-lab", "user": "labuser", "src_ip": "192.0.2.44", "event_type": "ssh_failure"}
+{"id": "benign_lookalike-002", "timestamp": "2026-10-02T13:00:30+00:00", "host": "ubuntu-lab", "user": "labuser", "src_ip": "192.0.2.44", "event_type": "ssh_success"}
