@@ -130,8 +130,9 @@ starts a new case. Detection uses an inclusive rolling ten-minute window:
 | Otherwise | Low | `insufficient_evidence` |
 
 Priority is a review order, not a compromise probability. Low volume is not proof
-of safety. The model's assessment can disagree with the rule category; the current
-dashboard does not explicitly flag that disagreement. No assessment executes actions.
+of safety. The model's assessment can disagree with the rule category; the dashboard
+shows both categories and flags disagreements for analyst review. This comparison
+does not check claim-level support or recommendation quality. No assessment executes actions.
 
 ## Supported input
 
@@ -173,7 +174,7 @@ See [architecture](docs/ARCHITECTURE.md), [support](SUPPORT.md),
 
 ## Next development priorities
 
-1. Display rule-derived facts separately from model interpretations and flag disagreement.
+1. Extend the dashboard's category disagreement flag to claim-level comparisons of rule-derived facts and model interpretations.
 2. Add claim-level support review and proportionality checks without disguising model failures.
 3. Collect authorized SSH logs from a real lab and validate the import adapter.
 4. Evaluate separately labeled, held-out scenarios and repeat injection tests.

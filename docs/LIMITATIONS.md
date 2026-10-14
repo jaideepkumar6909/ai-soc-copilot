@@ -16,8 +16,9 @@
 
 ## Known issues in this release
 
-1. Model assessments can differ from rule assessments without an explicit dashboard
-   disagreement banner. Both values are retained in exported case/report data.
+1. The dashboard flags rule/model review-category differences only. Matching categories
+   do not validate model claims or advice; factual disagreements within a report are
+   not detected. Both values remain in exported case/report data.
 2. The model can misdescribe the reason for a priority even when the priority field
    is correct. The host-injection evaluation demonstrates this.
 3. The prompt requests supporting citations, but validation checks only ID existence.
