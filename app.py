@@ -37,6 +37,7 @@ selected = st.selectbox('Select case', range(len(cases)), format_func=lambda i: 
 case = cases[selected]
 st.subheader('Evidence and rule result')
 st.write({'priority': case['priority'], 'signal': case['signal'], 'IP scope': case['ip_scope'], 'peak failures / 10 min': case['peak_failures_in_window']})
+st.write('Rule review category: ' + case['verdict'])
 st.caption('Priority is a rule-based review order, not a probability of compromise. Non-global IP includes private and documentation addresses.')
 st.dataframe(case['timeline'], width='stretch', hide_index=True)
 report = st.session_state['reports'].get(case['case_id'], baseline_report(case))
@@ -50,9 +51,17 @@ with st.expander('Optional LLM analysis'):
             st.session_state['reports'][case['case_id']] = report
         except ValueError as exc:
             st.error(str(exc))
-st.subheader('Investigation report')
+st.subheader('Model interpretation' if report['mode'] == 'llm_assisted' else 'Rules-only investigation report')
+if report['mode'] == 'llm_assisted' and report['verdict'] != case['verdict']:
+    st.warning(
+        f"Rule/model disagreement: rule review category is {case['verdict']}; "
+        f"model review category is {report['verdict']}. "
+        "Review the evidence before deciding; neither category establishes compromise or safety."
+    )
+if report['mode'] == 'llm_assisted':
+    st.caption('Category comparison only: matching categories do not validate model claims or recommendations.')
 st.caption('Mode: ' + report['mode'] + ' • Citation IDs are checked; whether each claim is supported still requires analyst review.')
-st.write('Assessment: ' + report['verdict'])
+st.write(('Model review category: ' if report['mode'] == 'llm_assisted' else 'Rule review category: ') + report['verdict'])
 for finding in report['findings']:
     st.text(finding['statement'])
     st.caption('Evidence: ' + ', '.join(finding['evidence_ids']))
